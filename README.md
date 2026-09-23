@@ -1,5 +1,7 @@
 This Rimworld mod adds "Animalese" style pawn speech! Think the dialogue in Animal Crossing or other JRPGs.
 
+Grab it here!! https://steamcommunity.com/sharedfiles/filedetails/?id=3806903620&
+
 You'll be able to hear their little ramblings whenever they have a social interaction.
 
 Voices are given based on gender, age, and body. This works with other mods like Jaxe's 'Interaction Bubbles', and lets you put a voice to each speech bubble.
