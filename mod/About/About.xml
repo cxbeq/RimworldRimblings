@@ -4,7 +4,8 @@
   <author>Rimblings contributors</author>
   <packageId>Paddy.rimblings</packageId>
   <supportedVersions><li>1.6</li></supportedVersions>
-  <description>Animalese-style pawn speech. Zoom in to hear individual voices; zoom out to fade them away. Voices vary by pawn identity, biological age, sex/gender value, head and body type. Hover or select a speaking pawn to emphasise it. Audio only: no speech bubbles.</description>
+  <description>This mod adds "Animalese" style pawn speech! Think the dialogue in Animal Crossing or other JRPGs.
+You'll be able to hear their little ramblings whenever they have a social interaction.</description>
   <modDependencies>
     <li>
       <packageId>brrainz.harmony</packageId>
