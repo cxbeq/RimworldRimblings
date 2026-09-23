@@ -1,6 +1,8 @@
 This Rimworld mod adds "Animalese" style pawn speech! Think the dialogue in Animal Crossing or other JRPGs.
 
-Grab it here!! https://steamcommunity.com/sharedfiles/filedetails/?id=3806903620&
+Requires the Harmony mod.
+
+Grab Rimlings here!! https://steamcommunity.com/sharedfiles/filedetails/?id=3806903620&
 
 You'll be able to hear their little ramblings whenever they have a social interaction.
 
