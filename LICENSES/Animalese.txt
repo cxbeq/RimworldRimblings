@@ -36,7 +36,7 @@ further varies pitch, cadence, tone and volume during playback.
 
 Animalese reference attribution
 
-Copyright © 2014 Josh Simmons.
+Copyright Â© 2014 Josh Simmons.
 Source: https://github.com/Acedio/animalese.js
 Pinned source: 6f18a909df12cdddab59438640ac8019b78fac2f
 
@@ -45,9 +45,8 @@ Creative Commons Attribution 4.0 International (CC BY 4.0):
 https://creativecommons.org/licenses/by/4.0/
 Legal text: https://creativecommons.org/licenses/by/4.0/legalcode
 
-Rimblings distributes the bank unchanged after acquisition by its build tool.
-Runtime speech and VoiceLab output concatenate, resample and fade these
-samples and vary pitch/cadence. Credit Josh Simmons / Acedio, retain the
+Rimblings distributes the bank unchanged. Runtime speech concatenates,
+resamples and fades these samples and varies pitch/cadence. Credit Josh Simmons / Acedio, retain the
 source and licence links, and identify these modifications when sharing
 adapted audio. No endorsement is implied.
 

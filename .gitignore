@@ -9,6 +9,5 @@ __pycache__/
 *.pyc
 *.user
 *.suo
-mod/Voices/*.wav
 mod/About/PublishedFileId.txt
 *.nupkg
