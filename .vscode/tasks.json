@@ -1,0 +1,42 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Rimblings: build and package",
+      "type": "process",
+      "command": "python",
+      "args": ["tools/manage.py", "build"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "group": {"kind": "build", "isDefault": true},
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Rimblings: all checks",
+      "type": "process",
+      "command": "python",
+      "args": ["tools/manage.py", "test"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "group": "test",
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Rimblings: audition default voice",
+      "type": "process",
+      "command": "python",
+      "args": ["tools/manage.py", "audition"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Rimblings: install (close the game first)",
+      "type": "process",
+      "command": "python",
+      "args": ["tools/manage.py", "install", "--game", "${input:rimworldRoot}"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {"id": "rimworldRoot", "type": "promptString", "description": "RimWorld installation root containing Data/Core/About/About.xml. Close the game first."}
+  ]
+}

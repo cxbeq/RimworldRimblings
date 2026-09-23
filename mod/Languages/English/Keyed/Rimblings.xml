@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Rimblings.Description>Pawns speak when they start social interactions. Zoom and distance control what you hear.</Rimblings.Description>
+  <Rimblings.SectionSpeech>Speech</Rimblings.SectionSpeech>
+  <Rimblings.SectionSpeechDesc>Choose whose voices play and how they sound.</Rimblings.SectionSpeechDesc>
+  <Rimblings.SectionHearing>Camera and distance</Rimblings.SectionHearing>
+  <Rimblings.SectionHearingDesc>Voices fade as you zoom out or move the camera away.</Rimblings.SectionHearingDesc>
+  <Rimblings.SectionMixing>Multiple speakers</Rimblings.SectionMixing>
+  <Rimblings.SectionMixingDesc>Control how voices share the mix when pawns speak at once.</Rimblings.SectionMixingDesc>
+  <Rimblings.Reset>Reset to defaults</Rimblings.Reset>
+  <Rimblings.Enabled>Enable pawn speech</Rimblings.Enabled>
+  <Rimblings.EnabledDesc>Turn all Rimblings voices on or off.</Rimblings.EnabledDesc>
+  <Rimblings.Volume>Speech volume</Rimblings.Volume>
+  <Rimblings.VolumeDesc>Set overall voice loudness.</Rimblings.VolumeDesc>
+  <Rimblings.FullZoom>Full volume at camera size</Rimblings.FullZoom>
+  <Rimblings.FullZoomDesc>Voices play at full zoom-based volume at or below this camera size. Smaller sizes mean a closer view.</Rimblings.FullZoomDesc>
+  <Rimblings.SilentZoom>Silent at camera size</Rimblings.SilentZoom>
+  <Rimblings.SilentZoomDesc>Voices fade to silence by this camera size. It must be larger than the full-volume size.</Rimblings.SilentZoomDesc>
+  <Rimblings.HearingRadius>Hearing radius from camera centre (tiles)</Rimblings.HearingRadius>
+  <Rimblings.HearingRadiusDesc>Voices outside this distance are silent, even off-screen.</Rimblings.HearingRadiusDesc>
+  <Rimblings.Ducking>Background voices when a speaker is focused</Rimblings.Ducking>
+  <Rimblings.DuckingDesc>Set how loud other voices remain when one pawn is focused.</Rimblings.DuckingDesc>
+  <Rimblings.MaxVoices>Maximum simultaneous voices</Rimblings.MaxVoices>
+  <Rimblings.MaxVoicesDesc>Extra overlapping voices may be skipped at this cap.</Rimblings.MaxVoicesDesc>
+  <Rimblings.LimitVoices>Limit simultaneous voices</Rimblings.LimitVoices>
+  <Rimblings.LimitVoicesDesc>Leave off for no simultaneous voice cap.</Rimblings.LimitVoicesDesc>
+  <Rimblings.NonPlayer>Include nearby non-player humanlike pawns</Rimblings.NonPlayer>
+  <Rimblings.NonPlayerDesc>Also hear visitors, raiders and other humanlike pawns.</Rimblings.NonPlayerDesc>
+  <Rimblings.ShortenWords>Shorten words (first and last letters)</Rimblings.ShortenWords>
+  <Rimblings.ShortenWordsDesc>Use each word's first and last letters for shorter speech.</Rimblings.ShortenWordsDesc>
+</LanguageData>

@@ -1,0 +1,12 @@
+{
+  "name": "Acedio animalese.wav",
+  "author": "Josh Simmons",
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "source": "https://github.com/Acedio/animalese.js",
+  "commit": "6f18a909df12cdddab59438640ac8019b78fac2f",
+  "url": "https://raw.githubusercontent.com/Acedio/animalese.js/6f18a909df12cdddab59438640ac8019b78fac2f/animalese.wav",
+  "git_blob_sha1": "6eca39220d755bdb3d7d89813fb7b440b165a5da",
+  "format": "26 contiguous 150 ms A-Z samples, 44100 Hz mono PCM8",
+  "modifications": "Bank bytes unchanged. Runtime output is resampled, concatenated, faded and varied by pawn."
+}
