@@ -9,7 +9,7 @@ public sealed class RimblingsMod : Mod
     public static RimblingsSettings Settings = new RimblingsSettings();
     public static string Root = string.Empty;
     private Vector2 scroll;
-    private float contentHeight = 580;
+    private float contentHeight = 800;
     public RimblingsMod(ModContentPack content) : base(content)
     {
         Root = content.RootDir;
@@ -19,51 +19,56 @@ public sealed class RimblingsMod : Mod
     public override string SettingsCategory() => "Rimblings";
     public override void DoSettingsWindowContents(Rect rect)
     {
-        var view = new Rect(0, 0, rect.width - 20, Mathf.Max(rect.height - 1, contentHeight));
-        Widgets.BeginScrollView(rect, ref scroll, view);
+        // Keep the reset action visible while the options scroll. The listing
+        // gets a tall layout rect so later rows never wrap into another column.
+        var scrollRect = new Rect(rect.x, rect.y, rect.width, Mathf.Max(0f, rect.height - 42f));
+        var view = new Rect(0f, 0f, scrollRect.width - 20f, Mathf.Max(scrollRect.height, contentHeight));
+        Widgets.BeginScrollView(scrollRect, ref scroll, view);
         var listing = new Listing_Standard();
-        listing.Begin(view);
+        listing.Begin(new Rect(0f, 0f, view.width, 100000f));
         listing.Label("Rimblings.Description".Translate());
         listing.Gap(8);
-        Checkbox(listing, view.width, "Rimblings.Enabled", "Rimblings.EnabledDesc", ref Settings.Enabled);
+        Checkbox(listing, "Rimblings.Enabled", "Rimblings.EnabledDesc", ref Settings.Enabled);
         listing.Gap(12);
 
         Section(listing, "Rimblings.SectionSpeech", "Rimblings.SectionSpeechDesc");
-        Slider(listing, view.width, "Rimblings.Volume", "Rimblings.VolumeDesc",
+        Slider(listing, "Rimblings.Volume", "Rimblings.VolumeDesc",
             ref Settings.Volume, 0f, 1f, Settings.Volume.ToString("P0"));
-        Checkbox(listing, view.width, "Rimblings.ShortenWords", "Rimblings.ShortenWordsDesc", ref Settings.ShortenWords);
-        Checkbox(listing, view.width, "Rimblings.NonPlayer", "Rimblings.NonPlayerDesc", ref Settings.NonPlayer);
+        Checkbox(listing, "Rimblings.ShortenWords", "Rimblings.ShortenWordsDesc", ref Settings.ShortenWords);
+        Checkbox(listing, "Rimblings.NonPlayer", "Rimblings.NonPlayerDesc", ref Settings.NonPlayer);
 
         Section(listing, "Rimblings.SectionHearing", "Rimblings.SectionHearingDesc");
-        Slider(listing, view.width, "Rimblings.FullZoom", "Rimblings.FullZoomDesc",
+        Slider(listing, "Rimblings.FullZoom", "Rimblings.FullZoomDesc",
             ref Settings.FullZoom, 4f, 30f, Settings.FullZoom.ToString("F1"));
         Settings.SilentZoom = Mathf.Max(Settings.SilentZoom, Settings.FullZoom + 0.5f);
-        Slider(listing, view.width, "Rimblings.SilentZoom", "Rimblings.SilentZoomDesc",
+        Slider(listing, "Rimblings.SilentZoom", "Rimblings.SilentZoomDesc",
             ref Settings.SilentZoom, Settings.FullZoom + 0.5f, 60f, Settings.SilentZoom.ToString("F1"));
-        Slider(listing, view.width, "Rimblings.HearingRadius", "Rimblings.HearingRadiusDesc",
+        Slider(listing, "Rimblings.HearingRadius", "Rimblings.HearingRadiusDesc",
             ref Settings.HearingRadius, 20f, 120f, Settings.HearingRadius.ToString("F0"));
 
         Section(listing, "Rimblings.SectionMixing", "Rimblings.SectionMixingDesc");
-        Slider(listing, view.width, "Rimblings.Ducking", "Rimblings.DuckingDesc",
+        Slider(listing, "Rimblings.Ducking", "Rimblings.DuckingDesc",
             ref Settings.BackgroundGain, 0.05f, 1f, Settings.BackgroundGain.ToString("P0"));
-        Checkbox(listing, view.width, "Rimblings.LimitVoices", "Rimblings.LimitVoicesDesc", ref Settings.LimitVoices);
+        Checkbox(listing, "Rimblings.LimitVoices", "Rimblings.LimitVoicesDesc", ref Settings.LimitVoices);
         if (Settings.LimitVoices)
         {
             float maxVoices = Settings.MaxVoices;
-            Slider(listing, view.width, "Rimblings.MaxVoices", "Rimblings.MaxVoicesDesc",
+            Slider(listing, "Rimblings.MaxVoices", "Rimblings.MaxVoicesDesc",
                 ref maxVoices, 1f, 64f, Settings.MaxVoices.ToString());
             Settings.MaxVoices = Mathf.RoundToInt(maxVoices);
         }
 
-        listing.Gap(16);
-        if (listing.ButtonText("Rimblings.Reset".Translate()))
+        listing.Gap(8);
+        contentHeight = listing.CurHeight + 12f;
+        listing.End();
+        Widgets.EndScrollView();
+
+        var resetRect = new Rect(rect.xMax - 180f, rect.yMax - 32f, 180f, 30f);
+        if (Widgets.ButtonText(resetRect, "Rimblings.Reset".Translate()))
         {
             Settings.Reset();
             WriteSettings();
         }
-        contentHeight = listing.CurHeight + 20;
-        listing.End();
-        Widgets.EndScrollView();
         Settings.Clamp();
     }
 
@@ -79,20 +84,18 @@ public sealed class RimblingsMod : Mod
         listing.Gap(4);
     }
 
-    private static void Checkbox(Listing_Standard listing, float width, string label, string description, ref bool value)
+    private static void Checkbox(Listing_Standard listing, string label, string description, ref bool value)
     {
-        float top = listing.CurHeight;
-        listing.CheckboxLabeled(label.Translate(), ref value);
-        TooltipHandler.TipRegion(new Rect(0, top, width, listing.CurHeight - top), description.Translate());
+        listing.CheckboxLabeled(label.Translate(), ref value, description.Translate());
     }
 
-    private static void Slider(Listing_Standard listing, float width, string label, string description,
+    private static void Slider(Listing_Standard listing, string label, string description,
         ref float value, float minimum, float maximum, string displayValue)
     {
         float top = listing.CurHeight;
         listing.Label(label.Translate() + ": " + displayValue);
         value = listing.Slider(value, minimum, maximum);
-        TooltipHandler.TipRegion(new Rect(0, top, width, listing.CurHeight - top), description.Translate());
+        TooltipHandler.TipRegion(new Rect(0, top, listing.ColumnWidth, listing.CurHeight - top), description.Translate());
         listing.Gap(4);
     }
 }
