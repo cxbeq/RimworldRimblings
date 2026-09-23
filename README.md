@@ -1,4 +1,4 @@
-This mod adds "Animalese" style pawn speech! Think the dialogue in Animal Crossing or other JRPGs.
+This Rimworld mod adds "Animalese" style pawn speech! Think the dialogue in Animal Crossing or other JRPGs.
 
 You'll be able to hear their little ramblings whenever they have a social interaction.
 
