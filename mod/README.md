@@ -1,17 +1,24 @@
-# Rimblings 0.2.0
+This mod adds voices to your pawns in the form of "Animalese" style speech! Think the sound of character voices in Animal Crossing or other JRPGs (synthetic phonics).
 
-Animalese-style social voices for RimWorld 1.6. Requires Harmony.
+You'll be able to hear their little ramblings whenever they have a social interaction.
 
-## Install or update
+Voices are given based on gender, age, and body. This perfectly compliments other mods like [Interaction Bubbles](https://steamcommunity.com/workshop/filedetails/?id=1516158345), and lets you put a voice to each speech bubble.
 
-Close RimWorld and put this Rimblings folder in the game's Mods directory so `Mods/Rimblings/About/About.xml` exists. Enable Harmony, Core and installed DLC before Rimblings. Do not enable a local and Workshop copy at the same time. Preserve an existing `About/PublishedFileId.txt` when replacing a previously uploaded copy.
+## Voice Customisation
 
-## Features
+You can customise each pawn's voice, changing their pitch, depth, speed, tone, and type. This menu defaults to appear on the main toolbar, which can be hidden under the Mod Options menu.
 
-Pawn speech defaults to 70%. Shorten words is enabled by default. Each pawn keeps one of eight recorded A-Z voice banks chosen by stable identity and gender; individual pitch, cadence and tone add variation. Simultaneous speech has no cap by default, with an optional cap in settings. Nearby off-screen pawns remain audible and fade by distance from the camera centre. Fog-hidden, dead and other-map pawns are silent.
+![Voice Customisation](https://i.postimg.cc/PrPmD5P9/Rim-World-Win64-2026-09-30-23-39-41.png)
 
-Speech tempo follows the game's effective speed multiplier without multiplying voice pitch. Pausing discards active speech. Mouse-near speakers take focus, then a selected speaker, otherwise central voices are more prominent. The mod plays audio only and does not display speech text.
+![Mod Options](https://i.postimg.cc/PJnBwR4G/Options.png)
 
-## Attribution
+## Configurable Mod options include:
 
-The mod includes converted Animalese Typing banks and an Acedio fallback bank. See `LICENSES/Animalese.txt` for attribution and licence details.
+- Turn pawn speech on or off, and whether visitors, raiders, and other nearby humanlike pawns speak.
+- Speech volume settings.
+- A toggle for shorter speech that instead reads each word’s first and last letters, rather than the full social interaction (in case your pawns are getting too chatty).
+- How voices fade with camera zoom, plus the hearing radius around the camera.
+- How loud background voices remain when a speaker is focused.
+- An optional cap on simultaneous voices, with an adjustable limit.
+- The ability to hide the voice customisation menu, if you'd prefer to keep a clean UI.
+- Compatibility with [SpeakUp](https://steamcommunity.com/sharedfiles/filedetails/?id=2502518544) to add further immersion with vocalised dialogue from that amazing mod!
