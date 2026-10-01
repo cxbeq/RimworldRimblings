@@ -179,6 +179,18 @@ public static class Animalese
             ordinal++;
         }
         int tail = Math.Min(output.Length, (int)(bank.SampleRate * 0.005));
+        // Add bass weight without resampling: depth never changes pitch or
+        // duration. Zero is a bit-for-bit bypass for all existing voices.
+        if (voice.Depth > 0)
+        {
+            float alpha = (float)(1 - Math.Exp(-2 * Math.PI * 700 / bank.SampleRate));
+            float low = 0;
+            for (int i = 0; i < output.Length; i++)
+            {
+                low += alpha * (output[i] - low);
+                output[i] = output[i] * (1 - voice.Depth * 0.65f) + low * voice.Depth * 0.65f;
+            }
+        }
         for (int i = 0; i < tail; i++) output[output.Length - 1 - i] *= i / (float)Math.Max(1, tail);
         return output;
     }

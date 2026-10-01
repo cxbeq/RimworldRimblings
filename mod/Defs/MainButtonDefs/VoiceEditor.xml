@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <MainButtonDef>
+    <defName>Rimblings_VoiceEditor</defName>
+    <label>Voice Editor</label>
+    <description>Edit and preview a pawn's Rimblings voice.</description>
+    <workerClass>Rimblings.MainButtonWorker_VoiceEditor</workerClass>
+    <tabWindowClass>Rimblings.MainTabWindow_VoiceEditor</tabWindowClass>
+    <order>498</order>
+    <closesWorldView>true</closesWorldView>
+  </MainButtonDef>
+</Defs>

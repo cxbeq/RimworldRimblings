@@ -22,6 +22,7 @@ public sealed class RimblingsSettings : ModSettings
     public float HearingRadius = DefaultHearingRadius;
     public int MaxVoices = DefaultMaxVoices;
     public bool LimitVoices = DefaultLimitVoices;
+    public bool HideVoiceEditor;
 
     public void Reset()
     {
@@ -33,6 +34,7 @@ public sealed class RimblingsSettings : ModSettings
         HearingRadius = DefaultHearingRadius;
         MaxVoices = DefaultMaxVoices;
         LimitVoices = DefaultLimitVoices;
+        HideVoiceEditor = false;
     }
     public void Clamp()
     {
@@ -57,6 +59,7 @@ public sealed class RimblingsSettings : ModSettings
         Scribe_Values.Look(ref HearingRadius, "hearingRadius", DefaultHearingRadius);
         Scribe_Values.Look(ref MaxVoices, "maxVoices", DefaultMaxVoices);
         Scribe_Values.Look(ref LimitVoices, "limitVoices", DefaultLimitVoices);
+        Scribe_Values.Look(ref HideVoiceEditor, "hideVoiceEditor", false);
         Clamp();
     }
 }

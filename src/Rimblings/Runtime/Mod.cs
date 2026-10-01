@@ -14,7 +14,9 @@ public sealed class RimblingsMod : Mod
     {
         Root = content.RootDir;
         Settings = GetSettings<RimblingsSettings>();
-        new Harmony("paddy.rimblings").PatchAll(typeof(RimblingsMod).Assembly);
+        var harmony = new Harmony("paddy.rimblings");
+        harmony.PatchAll(typeof(RimblingsMod).Assembly);
+        LongEventHandler.ExecuteWhenFinished(() => SpeakUpCompatibility.Initialize(harmony));
     }
     public override string SettingsCategory() => "Rimblings";
     public override void DoSettingsWindowContents(Rect rect)
@@ -29,6 +31,7 @@ public sealed class RimblingsMod : Mod
         listing.Label("Rimblings.Description".Translate());
         listing.Gap(8);
         Checkbox(listing, "Rimblings.Enabled", "Rimblings.EnabledDesc", ref Settings.Enabled);
+        Checkbox(listing, "Rimblings.HideVoiceEditor", "Rimblings.HideVoiceEditorDesc", ref Settings.HideVoiceEditor);
         listing.Gap(12);
 
         Section(listing, "Rimblings.SectionSpeech", "Rimblings.SectionSpeechDesc");

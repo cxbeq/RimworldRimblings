@@ -28,4 +28,47 @@
   <Rimblings.NonPlayerDesc>Also hear visitors, raiders and other humanlike pawns.</Rimblings.NonPlayerDesc>
   <Rimblings.ShortenWords>Shorten words (first and last letters)</Rimblings.ShortenWords>
   <Rimblings.ShortenWordsDesc>Use each word's first and last letters for shorter speech.</Rimblings.ShortenWordsDesc>
+  <Rimblings.HideVoiceEditor>Hide Voice Editor from the toolbar</Rimblings.HideVoiceEditor>
+  <Rimblings.HideVoiceEditorDesc>Hide the Voice Editor button. Existing custom voices keep working. Turn this off to show the button again.</Rimblings.HideVoiceEditorDesc>
+  <Rimblings.VoiceEditor>Voice Editor</Rimblings.VoiceEditor>
+  <Rimblings.EditorSaveHelp>Preview changes, then save the voice to apply them. Save the game afterward to keep them. Loading an earlier save restores its voices.</Rimblings.EditorSaveHelp>
+  <Rimblings.EditorUnavailable>Open a colony to edit pawn voices.</Rimblings.EditorUnavailable>
+  <Rimblings.EditorSearch>Search your colony's colonists by name, including those on other maps or travelling in caravans. Temporary quest guests are excluded.</Rimblings.EditorSearch>
+  <Rimblings.EditorNoFaction>No faction</Rimblings.EditorNoFaction>
+  <Rimblings.EditorNoPawns>No matching colonists.</Rimblings.EditorNoPawns>
+  <Rimblings.EditorShortVoice>Short voice</Rimblings.EditorShortVoice>
+  <Rimblings.EditorShortVoiceDesc>Use each word's first and last letters for shorter speech. Applies immediately to all pawn voices and previews.</Rimblings.EditorShortVoiceDesc>
+  <Rimblings.EditorSelectPawn>Select a pawn to edit their voice.</Rimblings.EditorSelectPawn>
+  <Rimblings.EditorUnsaved>Changes have not been applied.</Rimblings.EditorUnsaved>
+  <Rimblings.EditorCustom>Using a custom voice.</Rimblings.EditorCustom>
+  <Rimblings.EditorGenerated>Using the generated voice.</Rimblings.EditorGenerated>
+  <Rimblings.EditorPitch>Pitch</Rimblings.EditorPitch>
+  <Rimblings.EditorPitchDesc>Lower values produce a lower voice; higher values produce a higher voice.</Rimblings.EditorPitchDesc>
+  <Rimblings.EditorDepth>Depth</Rimblings.EditorDepth>
+  <Rimblings.EditorDepthDesc>Add bass weight and soften higher frequencies without changing pitch or speaking speed. Zero keeps the original tone.</Rimblings.EditorDepthDesc>
+  <Rimblings.EditorSpeed>Speaking speed</Rimblings.EditorSpeed>
+  <Rimblings.EditorSpeedDesc>Change the pawn's speaking cadence. Normal speech also follows game speed; previews play at normal game speed.</Rimblings.EditorSpeedDesc>
+  <Rimblings.EditorTone>Tone</Rimblings.EditorTone>
+  <Rimblings.ToneWarm>Warm</Rimblings.ToneWarm>
+  <Rimblings.ToneSoft>Soft</Rimblings.ToneSoft>
+  <Rimblings.ToneGravelly>Gravelly</Rimblings.ToneGravelly>
+  <Rimblings.ToneNasal>Nasal</Rimblings.ToneNasal>
+  <Rimblings.ToneBright>Bright</Rimblings.ToneBright>
+  <Rimblings.ToneLight>Light</Rimblings.ToneLight>
+  <Rimblings.EditorBank>Recording bank</Rimblings.EditorBank>
+  <Rimblings.EditorFemaleBank>Female recording {0}</Rimblings.EditorFemaleBank>
+  <Rimblings.EditorMaleBank>Male recording {0}</Rimblings.EditorMaleBank>
+  <Rimblings.EditorPhrase>Test phrase</Rimblings.EditorPhrase>
+  <Rimblings.EditorPhrase0>The Rimblings mod is fun.</Rimblings.EditorPhrase0>
+  <Rimblings.EditorPhrase1>This is what I sound like.</Rimblings.EditorPhrase1>
+  <Rimblings.EditorPhrase2>Hello there! Welcome to our colony.</Rimblings.EditorPhrase2>
+  <Rimblings.EditorPreview>Preview voice</Rimblings.EditorPreview>
+  <Rimblings.EditorStop>Stop preview</Rimblings.EditorStop>
+  <Rimblings.EditorPreviewFailed>Preview could not play. Check Rimblings speech volume, game volume, and that the voice-bank files are installed.</Rimblings.EditorPreviewFailed>
+  <Rimblings.EditorSave>Save voice</Rimblings.EditorSave>
+  <Rimblings.EditorApplied>Voice applied. Save the game to retain this change.</Rimblings.EditorApplied>
+  <Rimblings.EditorRestore>Restore generated voice</Rimblings.EditorRestore>
+  <Rimblings.EditorRevert>Revert unapplied changes</Rimblings.EditorRevert>
+  <Rimblings.EditorDiscard>Discard changes</Rimblings.EditorDiscard>
+  <Rimblings.EditorDiscardDesc>This pawn has unapplied voice changes. Discard them?</Rimblings.EditorDiscardDesc>
 </LanguageData>

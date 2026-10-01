@@ -58,17 +58,26 @@ internal static class SocialLogHook
     private static readonly FieldInfo? InteractionInitiator = AccessTools.Field(typeof(PlayLogEntry_Interaction), "initiator");
     private static readonly FieldInfo? SingleInitiator = AccessTools.Field(typeof(PlayLogEntry_InteractionSinglePawn), "initiator");
     private static ConditionalWeakTable<LogEntry, object> Seen = new ConditionalWeakTable<LogEntry, object>();
-    internal static void Reset() => Seen = new ConditionalWeakTable<LogEntry, object>();
+    internal static void Reset()
+    {
+        Seen = new ConditionalWeakTable<LogEntry, object>();
+        SpeakUpCompatibility.Reset();
+    }
+    internal static Pawn? Speaker(LogEntry entry) => entry is PlayLogEntry_Interaction
+        ? InteractionInitiator?.GetValue(entry) as Pawn
+        : entry is PlayLogEntry_InteractionSinglePawn ? SingleInitiator?.GetValue(entry) as Pawn : null;
     private static void Postfix(LogEntry __0)
     {
         try
         {
             if (__0 == null || Seen.TryGetValue(__0, out _)) return;
             Seen.Add(__0, new object());
-            Pawn? speaker = __0 is PlayLogEntry_Interaction ? InteractionInitiator?.GetValue(__0) as Pawn
-                : __0 is PlayLogEntry_InteractionSinglePawn ? SingleInitiator?.GetValue(__0) as Pawn : null;
+            Pawn? speaker = Speaker(__0);
             SpeechController? controller = Current.Game?.GetComponent<SpeechController>();
             if (speaker == null || controller == null || !controller.CanQueue(speaker)) return;
+            // SpeakUp resolves dialogue (and schedules replies) when Bubbles
+            // first draws it. Wait for that text instead of invoking its grammar.
+            if (SpeakUpCompatibility.Defer(__0)) return;
             string text;
             // Log grammar can use Verse.Rand. Isolate it from simulation RNG.
             Rand.PushState(unchecked((int)StableHash.Of(speaker.GetUniqueLoadID() + "|" + __0.Tick)));

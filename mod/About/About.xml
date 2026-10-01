@@ -3,14 +3,44 @@
   <name>Rimblings</name>
   <author>Rimblings contributors</author>
   <packageId>Paddy.rimblings</packageId>
+  <modVersion>0.2.3</modVersion>
   <supportedVersions><li>1.6</li></supportedVersions>
-  <description>This mod adds "Animalese" style pawn speech! Think the dialogue in Animal Crossing or other JRPGs.
-You'll be able to hear their little ramblings whenever they have a social interaction.</description>
+  <url>https://steamcommunity.com/sharedfiles/filedetails/?id=3806903620</url>
+  <description><![CDATA[This mod adds voices to your pawns in the form of "Animalese" style speech! Think the sound of character voices in Animal Crossing or other JRPGs (synthetic phonics).
+
+You'll be able to hear their little ramblings whenever they have a social interaction.
+
+Voices are given based on gender, age, and body. This perfectly complements other mods like Interaction Bubbles, and lets you put a voice to each speech bubble.
+
+<b>Voice Customisation</b>
+You can customise each pawn's voice, changing their pitch, depth, speed, tone, and type. This menu defaults to appear on the main toolbar, which can be hidden under the Mod Options menu.
+
+<b>Configurable Mod options include:</b>
+• Turn pawn speech on or off, and whether visitors, raiders, and other nearby humanlike pawns speak.
+• Speech volume settings.
+• A toggle for shorter speech that instead reads each word's first and last letters, rather than the full social interaction (in case your pawns are getting too chatty).
+• How voices fade with camera zoom, plus the hearing radius around the camera.
+• How loud background voices remain when a speaker is focused.
+• An optional cap on simultaneous voices, with an adjustable limit.
+• The ability to hide the voice customisation menu, if you'd prefer to keep a clean UI.
+• Compatibility with SpeakUp to add further immersion with vocalised dialogue from that amazing mod!
+
+<b>Requirements and compatibility</b>
+Requires Harmony installed. Load Harmony before Rimblings.
+Interaction Bubbles and SpeakUp are optional. If you use them, load them before Rimblings.
+
+Harmony: https://steamcommunity.com/workshop/filedetails/?id=2009463077
+Interaction Bubbles: https://steamcommunity.com/workshop/filedetails/?id=1516158345
+SpeakUp: https://steamcommunity.com/sharedfiles/filedetails/?id=2502518544
+
+<b>Source code:</b> GitHub - Rimblings
+https://github.com/cxbeq/RimworldRimblings/]]></description>
   <modDependencies>
     <li>
       <packageId>brrainz.harmony</packageId>
       <displayName>Harmony</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/workshop/filedetails/?id=2009463077</steamWorkshopUrl>
     </li>
   </modDependencies>
-  <loadAfter><li>brrainz.harmony</li><li>ludeon.rimworld</li></loadAfter>
+  <loadAfter><li>brrainz.harmony</li><li>ludeon.rimworld</li><li>Jaxe.Bubbles</li><li>JPT.speakup</li></loadAfter>
 </ModMetaData>

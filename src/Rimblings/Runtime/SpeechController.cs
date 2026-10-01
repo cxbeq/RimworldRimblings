@@ -43,7 +43,62 @@ public sealed class SpeechController : GameComponent
     private bool bankFailed;
     private Map? map;
     private float nextCooldownCleanup;
+    private readonly VoiceOverrides overrides = new VoiceOverrides();
+    private Voice? preview;
     public SpeechController(Game game) { }
+    public override void ExposeData()
+    {
+        Scribe_Collections.Look(ref overrides.Records, "voiceOverrides", LookMode.Value, LookMode.Value);
+        if (Scribe.mode == LoadSaveMode.PostLoadInit) overrides.Validate();
+    }
+    public VoiceProfile GetVoice(Pawn pawn) => overrides.Resolve(pawn.GetUniqueLoadID(), GeneratedVoice(pawn));
+    public static VoiceProfile GeneratedVoice(Pawn pawn) => VoiceProfile.From(VoiceAdapters.Get(pawn));
+    public bool HasVoiceOverride(Pawn pawn) => overrides.HasOverride(pawn.GetUniqueLoadID());
+    public void SaveVoice(Pawn pawn, VoiceProfile profile)
+    {
+        overrides.Set(pawn.GetUniqueLoadID(), profile);
+        StopPawnSpeech(pawn);
+    }
+    public void ResetVoice(Pawn pawn)
+    {
+        overrides.Reset(pawn.GetUniqueLoadID());
+        StopPawnSpeech(pawn);
+    }
+    private void StopPawnSpeech(Pawn pawn)
+    {
+        pending.RemoveAll(request => request.Pawn == pawn);
+        for (int i = voices.Count - 1; i >= 0; i--) if (voices[i].Pawn == pawn) RemoveAt(i);
+    }
+    public bool Preview(Pawn pawn, VoiceProfile profile, string text)
+    {
+        StopPreview();
+        if (Settings.Volume <= 0 || Prefs.VolumeGame <= 0) return false;
+        try
+        {
+            preview = CreateVoice(pawn, profile, text, 1, isPreview: true);
+            if (preview == null) return false;
+            return true;
+        }
+        catch (Exception ex)
+        {
+            StopPreview();
+            Log.WarningOnce("[Rimblings] Voice preview failed: " + ex.Message, 194072704);
+            return false;
+        }
+    }
+    public void StopPreview()
+    {
+        if (preview == null) return;
+        DestroyVoice(preview);
+        preview = null;
+    }
+    private void UpdatePreview()
+    {
+        if (preview == null) return;
+        if (Current.ProgramState != ProgramState.Playing || preview.Pawn.Destroyed
+            || (Time.realtimeSinceStartup - preview.Started > 0.1f && !preview.Source.isPlaying)) StopPreview();
+        else preview.Source.volume = Settings.Volume * MathEx.Clamp(Prefs.VolumeGame, 0, 1) * 0.85f;
+    }
     private static RimblingsSettings Settings => RimblingsMod.Settings;
     private static bool MapView()
     {
@@ -136,7 +191,7 @@ public sealed class SpeechController : GameComponent
     }
     public override void GameComponentUpdate()
     {
-        try { UpdateAudio(); }
+        try { UpdatePreview(); UpdateAudio(); }
         catch (Exception ex)
         {
             Clear();
@@ -147,10 +202,10 @@ public sealed class SpeechController : GameComponent
     {
         if (!MapView() || !Settings.Enabled || Find.TickManager.Paused)
         {
-            Clear();
+            ClearSpeech();
             return;
         }
-        if (map != Find.CurrentMap) { Clear(); map = Find.CurrentMap; }
+        if (map != Find.CurrentMap) { ClearSpeech(); map = Find.CurrentMap; }
         float now = Time.realtimeSinceStartup;
         if (now >= nextCooldownCleanup)
         {
@@ -243,11 +298,16 @@ public sealed class SpeechController : GameComponent
     }
     private void Start(Request request, float speed)
     {
-        VoiceProfile profile = VoiceProfile.From(VoiceAdapters.Get(request.Pawn));
+        Voice? voice = CreateVoice(request.Pawn, GetVoice(request.Pawn), request.Text, speed);
+        if (voice == null) return;
+        voices.Add(voice);
+    }
+    private Voice? CreateVoice(Pawn pawn, VoiceProfile profile, string text, float speed, bool isPreview = false)
+    {
         LetterBank? bank = LoadBank(profile);
-        if (bank == null) return;
-        float[] original = Animalese.Render(bank, request.Text, profile, shortenWords: Settings.ShortenWords);
-        if (original.Length == 0) return;
+        if (bank == null) return null;
+        float[] original = Animalese.Render(bank, text, profile, shortenWords: Settings.ShortenWords);
+        if (original.Length == 0) return null;
         AudioClip? clip = null;
         GameObject? obj = null;
         try
@@ -259,8 +319,10 @@ public sealed class SpeechController : GameComponent
             // Tempo is rendered separately: do not use pitch=speed (raises
             // voices and cannot represent all game speed multipliers).
             source.spatialBlend = 0; source.pitch = 1; source.volume = 0; source.clip = clip;
+            source.ignoreListenerPause = isPreview;
+            if (isPreview) source.volume = Settings.Volume * MathEx.Clamp(Prefs.VolumeGame, 0, 1) * 0.85f;
             source.Play();
-            voices.Add(new Voice { Pawn = request.Pawn, Object = obj, Source = source, Clip = clip, Bank = bank, Original = original, Speed = speed, Started = Time.realtimeSinceStartup });
+            return new Voice { Pawn = pawn, Object = obj, Source = source, Clip = clip, Bank = bank, Original = original, Speed = speed, Started = Time.realtimeSinceStartup };
         }
         catch
         {
@@ -288,13 +350,21 @@ public sealed class SpeechController : GameComponent
     }
     private void RemoveAt(int index)
     {
-        Voice voice = voices[index];
+        DestroyVoice(voices[index]);
+        voices.RemoveAt(index);
+    }
+    private static void DestroyVoice(Voice voice)
+    {
         if (voice.Source != null) voice.Source.Stop();
         if (voice.Object != null) Object.Destroy(voice.Object);
         if (voice.Clip != null) Object.Destroy(voice.Clip);
-        voices.RemoveAt(index);
     }
     public void Clear()
+    {
+        StopPreview();
+        ClearSpeech();
+    }
+    private void ClearSpeech()
     {
         for (int i = voices.Count - 1; i >= 0; i--) RemoveAt(i);
         pending.Clear(); cooldowns.Clear(); map = null;

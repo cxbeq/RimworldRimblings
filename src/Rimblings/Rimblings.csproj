@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>Rimblings</AssemblyName>
     <RootNamespace>Rimblings</RootNamespace>
-    <Version>0.2.0</Version>
+    <Version>0.2.3</Version>
     <Deterministic>true</Deterministic>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
     <DebugType>portable</DebugType>

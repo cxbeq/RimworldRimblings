@@ -22,14 +22,16 @@ public readonly struct VoiceProfile
     public readonly uint Seed;
     public readonly VoiceTone Tone;
     public readonly int BankIndex;
+    public readonly float Depth;
     public string BankName => (BankIndex < 4 ? "female_" : "male_") + (BankIndex % 4 + 1);
-    public VoiceProfile(float pitch, float cadence, uint seed, VoiceTone tone = VoiceTone.Warm, int bankIndex = 0)
+    public VoiceProfile(float pitch, float cadence, uint seed, VoiceTone tone = VoiceTone.Warm, int bankIndex = 0, float depth = 0)
     {
         Pitch = MathEx.Clamp(pitch, 0.7f, 1.8f);
         Cadence = MathEx.Clamp(cadence, 0.75f, 1.35f);
         Seed = seed;
         Tone = (int)tone >= 0 && (int)tone < 6 ? tone : VoiceTone.Warm;
         BankIndex = bankIndex >= 0 && bankIndex < 8 ? bankIndex : 0;
+        Depth = MathEx.Clamp(depth, 0, 1);
     }
 
     // Artistic presets, not assertions about real people. The v2 distribution is
